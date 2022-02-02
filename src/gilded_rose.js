@@ -21,7 +21,7 @@ class Shop {
       if (item.name != BRIE && item.name != BACKSTAGE_PASSES) {
         if (item.quality > 0) {
           if (item.name != SULFURAS) {
-            item.quality = item.quality - 1;
+            item.quality --;
           }
         }
       } else {
@@ -30,26 +30,26 @@ class Shop {
           if (item.name == BACKSTAGE_PASSES) {
             if (item.sellIn < 11) {
               if (item.quality < 50) {
-                item.quality = item.quality + 1;
+                item.quality ++;
               }
             }
             if (item.sellIn < 6) {
               if (item.quality < 50) {
-                item.quality = item.quality + 1;
+                item.quality ++;
               }
             }
           }
         }
       }
       if (item.name != SULFURAS) {
-        item.sellIn = item.sellIn - 1;
+        item.sellIn --;
       }
       if (item.sellIn < 0 || item.name == CONJURED)  {
         if (item.name != BRIE) {
           if (item.name != BACKSTAGE_PASSES) {
             if (item.quality > 0) {
               if (item.name != SULFURAS) {
-                item.quality = item.quality - 1;
+                item.quality --;
               }
             }
           } else {
@@ -57,7 +57,7 @@ class Shop {
           }
         } else {
           if (item.quality < 50) {
-            item.quality = item.quality + 1;
+            item.quality ++;
           }
         }
       }
