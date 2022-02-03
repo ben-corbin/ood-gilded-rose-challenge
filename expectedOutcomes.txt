@@ -1,15 +1,15 @@
 OMGHAI!
 -------- day 0 --------
 name, sellIn, quality
-+5 Dexterity Vest, 10, 20
-Aged Brie, 2, 0
-Elixir of the Mongoose, 5, 7
-Sulfuras, Hand of Ragnaros, 0, 80
++5 Dexterity Vest, 10, 20 NORMAL ITEM
+Aged Brie, 2, 0 AGES NORMALLY QUALITY GOES UP
+Elixir of the Mongoose, 5, 7 NORMAL ITEM
+Sulfuras, Hand of Ragnaros, 0, 80 DOESN"T CHANGE AT ALL
 Sulfuras, Hand of Ragnaros, -1, 80
-Backstage passes to a TAFKAL80ETC concert, 15, 20
+Backstage passes to a TAFKAL80ETC concert, 15, 20 NORAMAL AGING UNTIL 0 THEN WORTHLESS, QUALITY INCREASES DIFFERENTLY DEPENDING ON SELL IN
 Backstage passes to a TAFKAL80ETC concert, 10, 49
 Backstage passes to a TAFKAL80ETC concert, 5, 49
-Conjured Mana Cake, 3, 6
+Conjured Mana Cake, 3, 6 AGES NORMALLY, QUALITY DROPS TWICE AS FAST
 
 -------- day 1 --------
 name, sellIn, quality

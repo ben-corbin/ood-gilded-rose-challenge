@@ -6,17 +6,71 @@ class Item {
   }
 }
 
-const BRIE = 'Aged Brie'
-const BACKSTAGE_PASSES = 'Backstage passes to a TAFKAL80ETC concert'
-const BACKSTAGE_PASSES_ACCELORATOR_1 = 11
-const BACKSTAGE_PASSES_ACCELORATOR_2 = 6
-const BACKSTAGE_PASS_EXPIRED = -1
-const SULFURAS = 'Sulfuras, Hand of Ragnaros'
-const CONJURED = 'Conjured Mana Cake'
-const MIN_QUALITY = 0
-const MAX_QUALITY = 50
-const SELL_IN_0 = 0
+class NormalItem extends Item {
+  
+  constructor(name, sellIn, quality) {
+    super(name, sellIn, quality)
+  }
 
+  dailyQualityUpdater() {
+    this.sellIn --
+    if (this.quality > 0 && this.quality < 50 && this.sellIn < 0) this.quality = this.quality - 2
+    if (this.quality > 0 && this.quality < 50 && this.sellIn >= 0) this.quality --
+    
+}
+}
+
+class Cheese extends Item {
+  
+  constructor(name, sellIn, quality) {
+    super(name, sellIn, quality)
+  }
+
+  dailyQualityUpdater() {
+    this.sellIn --
+    if (this.quality > -1 && this.quality < 50 && this.sellIn >= 0) this.quality ++
+    if (this.quality > -1 && this.quality < 50 && this.sellIn < 0) this.quality = this.quality +2
+  } 
+}
+
+class Sulfuras extends Item {
+  
+  constructor(name, sellIn, quality) {
+    super(name, sellIn, quality)
+  }
+
+  dailyQualityUpdater() {
+    return 
+  }
+}
+
+class BackStage extends Item {
+  
+  constructor(name, sellIn, quality) {
+    super(name, sellIn, quality)
+  }
+
+  dailyQualityUpdater() {
+    this.sellIn --
+    if (this.quality > -1 && this.quality < 50 && this.sellIn >= 11) this.quality = this.quality + 1
+    if (this.quality > -1 && this.quality < 50 && this.sellIn <= 10 && this.sellIn >= 6) this.quality = this.quality + 2
+    if (this.quality > -1 && this.quality < 50 && this.sellIn <= 5) this.quality = this.quality + 3
+    if (this.sellIn <= 0) this.quality = 0
+  } 
+}
+
+class Conjured extends Item {
+  
+  constructor(name, sellIn, quality) {
+    super(name, sellIn, quality)
+  }
+
+  dailyQualityUpdater() {
+    this.sellIn --
+    if (this.quality > -1 && this.quality < 50 && this.sellIn > 0) this.quality = this.quality -2
+    if (this.quality > -1 && this.quality < 50 && this.sellIn < 0) this.quality = this.quality -4
+  } 
+}
 
 
 class Shop {
@@ -25,28 +79,9 @@ class Shop {
   }
 
   updateQuality() {
-    for (const item of this.items) {
-      //checking if item is standard and if it is, decrementing quality by 1
-      if (item.name != BRIE && item.name != BACKSTAGE_PASSES && item.name != SULFURAS && item.quality > MIN_QUALITY) item.quality --;
-      
-       else {
-        //checking if Brie quality is less than 50, then incrementing
-        if (item.quality < MAX_QUALITY) item.quality ++
-        //Check if item is BACKSTAGE_PASSES and if sellIn is less than 11 and quality is still 
-        //less than 50 then increment by 1
-        if (item.name == BACKSTAGE_PASSES && item.sellIn < BACKSTAGE_PASSES_ACCELORATOR_1 && item.quality < MAX_QUALITY) item.quality ++
-          //and then check if the sellIn is less than 6 and
-        //quality is still less them 50 then increment by 1 again
-        if (item.name == BACKSTAGE_PASSES && item.sellIn < BACKSTAGE_PASSES_ACCELORATOR_2 && item.quality < MAX_QUALITY) item.quality ++;
-        }
-      //deals with decrementing days which is equal for all items apart from SULFURAS
-      if (item.name != SULFURAS) item.sellIn --;
-      //Decrements quality again for items that have expired, or are conjured, and makes sure that these items are not one of the special items
-      if (item.sellIn < SELL_IN_0 || item.name == CONJURED && item.name != BRIE && item.name != BACKSTAGE_PASSES && item.name != SULFURAS && item.quality > MIN_QUALITY)  item.quality --;
-      //reduces the quality of BACKSTAGE_PASSES to 0 as soon as they expire
-      if(item.name == BACKSTAGE_PASSES && item.sellIn === BACKSTAGE_PASS_EXPIRED) item.quality = MIN_QUALITY    
-    }
-    return this.items;
+    
+    this.items.forEach(item => item.dailyQualityUpdater())
+    return this.items
   }
 }
 
@@ -54,5 +89,10 @@ class Shop {
 
 module.exports = {
   Item,
-  Shop
+  Shop,
+  NormalItem,
+  Cheese,
+  Sulfuras, 
+  BackStage,
+  Conjured
 }
