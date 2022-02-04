@@ -8,11 +8,7 @@ class Item {
 
 class NormalItem extends Item {
   
-  constructor(name, sellIn, quality) {
-    super(name, sellIn, quality)
-  }
-
-  dailyQualityUpdater() {
+    dailyQualityUpdater() {
     this.sellIn --
     if (this.quality > 0 && this.quality < 50 && this.sellIn < 0) this.quality = this.quality - 2
     if (this.quality > 0 && this.quality < 50 && this.sellIn >= 0) this.quality --
@@ -22,11 +18,7 @@ class NormalItem extends Item {
 
 class Cheese extends Item {
   
-  constructor(name, sellIn, quality) {
-    super(name, sellIn, quality)
-  }
-
-  dailyQualityUpdater() {
+    dailyQualityUpdater() {
     this.sellIn --
     if (this.quality > -1 && this.quality < 50 && this.sellIn >= 0) this.quality ++
     if (this.quality > -1 && this.quality < 50 && this.sellIn < 0) this.quality = this.quality +2
@@ -35,22 +27,14 @@ class Cheese extends Item {
 
 class Sulfuras extends Item {
   
-  constructor(name, sellIn, quality) {
-    super(name, sellIn, quality)
-  }
-
-  dailyQualityUpdater() {
+    dailyQualityUpdater() {
     return 
   }
 }
 
 class BackStage extends Item {
   
-  constructor(name, sellIn, quality) {
-    super(name, sellIn, quality)
-  }
-
-  dailyQualityUpdater() {
+    dailyQualityUpdater() {
     this.sellIn --
     if (this.quality > -1 && this.quality < 50 && this.sellIn >= 11) this.quality = this.quality + 1
     if (this.quality > -1 && this.quality < 50 && this.sellIn <= 10 && this.sellIn >= 6) this.quality = this.quality + 2
@@ -61,17 +45,12 @@ class BackStage extends Item {
 
 class Conjured extends Item {
   
-  constructor(name, sellIn, quality) {
-    super(name, sellIn, quality)
-  }
-
-  dailyQualityUpdater() {
+    dailyQualityUpdater() {
     this.sellIn --
     if (this.quality > -1 && this.quality < 50 && this.sellIn > 0) this.quality = this.quality -2
     if (this.quality > -1 && this.quality < 50 && this.sellIn < 0) this.quality = this.quality -4
   } 
 }
-
 
 class Shop {
   constructor(items=[]){
@@ -84,8 +63,6 @@ class Shop {
     return this.items
   }
 }
-
-
 
 module.exports = {
   Item,
